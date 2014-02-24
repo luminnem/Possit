@@ -1,0 +1,63 @@
+/*body {*/
+/*  font-family: courier;*/
+/*  background: url("../resources/chalkboard.jpg");*/
+/*  color: white;*/
+/*}*/
+a {
+  text-decoration: none;
+  color: white;
+}
+.register_textbox {
+  width: auto;
+}
+
+#register_elements {
+  list-style: none;
+  position: absolute;
+  left: 40%;
+  top: 10%;
+  border: 1px white solid;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-style: dashed;
+}
+
+#id_logo {
+  font-size: 30px;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#id_logo span{
+  font-size: 34px;
+  font-weight: bold;
+  border-left: 1px white dashed;
+  color: white;
+  padding-left: 5px;
+}
+
+#header_message {
+  display: inline-block;
+  font-size: 11px;
+  width: 250px;
+  position: relative;
+  top: 10px;
+}
+
+label {
+  font-size: 12px;
+}
+
+.textbox {
+  width: 200px;
+}
+
+.button {
+  padding: 10px;
+  font-size: 20px;
+  width: 250px;
+  position:relative;
+  left: -20px;
+  top: 10px;
+}
