@@ -1,5 +1,5 @@
 <style>
-textarea {
+#newPostArea textarea {
     background: #FEFDCA;
 	background: -moz-linear-gradient(to top, #FFFFF0 0%, #FEFDCA 100%);
 	background: linear-gradient(to top, #FFFFF0 0%, #FEFDCA 100%);
@@ -55,6 +55,6 @@ textarea {
 		<p id="title">New note</p>
 		<textarea cols="29" rows="9" maxLength="270" id="postAreaText"></textarea>
 		<p>
-		    <button class="login_button_big" title="Post it" onClick="checkData()">Send</button>
+		    <button class="login_button_big" title="Post it" onClick="checkPostData();">Send</button>
 		</p>
 </div>

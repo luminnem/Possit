@@ -18,7 +18,13 @@ function sendData(username, password, email, error) {
 	
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			error.innerHTML = xmlhttp.responseText;
+			var errorField = document.getElementById("register_button");
+			var response = xmlhttp.responseText;
+			if (response == "1") {
+				errorField.value = "Enjoy!";
+			} else {
+				errorField.value = response;
+			}
 		}
 	}
 	

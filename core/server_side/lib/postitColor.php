@@ -12,7 +12,7 @@ class RandomColor {
     }
     
     public function getRandomColor() {
-        $v = rand(0, count($this->colorList));
+        $v = rand(0, count($this->colorList)-1);
         return $this->colorList[$v];
     }
 }

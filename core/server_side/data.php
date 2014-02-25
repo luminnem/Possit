@@ -1,8 +1,8 @@
 <?php
-define("host", "mysql.3owl.com");
-define("user", "u460684700_posit");
-define("password", "626474139a");
-define("name", "u460684700_posit");
+define("host", "localhost");
+define("user", "root");
+define("password", "");
+define("name", "posit_core");
 
-$connection = mysql_connect(host, user, password) or die ("Problems with connection...");
+$connection = mysql_connect(host, user, password) or die (mysql_error()."Problems with connection...");
 $db_connection = mysql_select_db(name, $connection);

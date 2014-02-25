@@ -1,0 +1,13 @@
+#search_results {
+	margin: 20px;
+}
+
+#search_results p{
+	color: black !important;
+	font-size: 25px;
+}
+
+#search_results a{
+	color: blue !important;
+	font-size: 18px;
+}

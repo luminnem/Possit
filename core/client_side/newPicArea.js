@@ -1,28 +1,31 @@
-function showTextarea() {
+function showPicArea() {
 	
-	var textarea = document.getElementById("postArea");
+	var textarea = document.getElementById("picArea");
 	textarea.style.display = "block";
 }
 
-function hideTextarea() {
-	var textarea = document.getElementById("postArea");
+function hidePicArea() {
+	var textarea = document.getElementById("picArea");
 	textarea.style.display = "none";
+	textarea.value = "";
 }
 
 
 
-function checkPostData() {
-	var area = document.getElementById("postAreaText").value;
+function checkPicData() {
+	var url = document.getElementById("picAreaUrl").value;
+	var caption = document.getElementById("newPicCaption").value;
 	
-	if (area.length > 0) {
-		sendPost(area);
+	if (url.length > 0 && caption.length > 0) {
+		sendPic(url, caption);
+		
 	} else {
 		var notifications = document.getElementById("notifications");
 		notifications.style.display = "inline-block";
 		notifications.innerHTML = "No enough characters";
 	}
 }
-function sendPost(area) {
+function sendPic(url, caption) {
 
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -40,16 +43,16 @@ function sendPost(area) {
 			
 			if (response == "1") {
 
-				notifications.innerHTML = "Post sent";
+				notifications.innerHTML = "Pic sent";
 			} else {
 				notifications.innerHTML = xmlhttp.responseText;
 			}
-			hideTextarea();
+			hidePicArea();
 			
 		}
 	}
 	
-	xmlhttp.open("POST", "core/server_side/sendPost.php", true);
+	xmlhttp.open("POST", "core/server_side/sendPic.php", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xmlhttp.send("data="+area);
+	xmlhttp.send("url="+url+"&caption="+caption);
 }

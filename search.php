@@ -1,9 +1,9 @@
-<!DOCTYPE HTML>
 <?php
-	session_start();
-	//require_once("core/server_side/data.php");
-	
+session_start();
+require_once("core/server_side/data.php");
+include "core/server_side/lib/usersManager.php";
 ?>
+
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
 	<head>
 		<title>Posit</title>
@@ -15,6 +15,7 @@
 		<link href="styles/login_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/comments.css" rel="Stylesheet" type="text/css">
 		<link href="styles/pictures.css" rel="Stylesheet" type="text/css">
+		<link href="styles/search.css" rel="Stylesheet" type="text/css">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         
@@ -47,18 +48,28 @@
 				}
 			?>
 		</div>
-		<div id="body">
+		<div id="search_results">
 			<?php
-				include "postsAreas.php";
-			?>
+			$toFind = mysql_real_escape_string($_GET['username']);
+			$toFind = strtolower($toFind);
+			$toFind = base64_encode($toFind);
+
+			$query = "SELECT ID FROM users WHERE username LIKE '%$toFind%' LIMIT 5";
+
+			$q = mysql_query($query, $connection) or die(mysql_error());
+			$usersManager = new UsersManager($connection);
 			
-			<div id="topComments">
-				<?php
-				include "topComments.php";
-				?>
+			$numbers = "<p>%d matches</p>";
+			echo sprintf($numbers, mysql_num_rows($q));
+			
+			while ($d = mysql_fetch_assoc($q)) {
+				$id = $d['ID'];
+				$username = $usersManager->getUsername($id);
 				
-				
-			</div>
+				$string = "<p><a href='profile.php?id=%d'>%s</a></p>";
+				echo sprintf($string, $id, $username);
+			}
+			?>
 		</div>
 	</body>
 </html>

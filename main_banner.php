@@ -13,13 +13,16 @@
 			</td>
 			<td>
 				<p>
-					<form action="" method="post">
-						<input id="searchbox" name="search_query" placeholder="Search">
+					<form action="search.php" method="get" id='searchForm'>
+						<input id="searchbox" name="username" placeholder="Search" onKeyDown='checkToSearch(event)'>
 					</form>
 				</p>
 			</td>
 			<td id="newPostIcon">
-				<button id="newPostButton" class="login_button" onClick="showTextarea(); theBox(true, 'newPostArea', ''); theBox(false, 'month', 'showBtn');" title="New Note"><img src="resources/postit.png"></img></button>
+				<button id="newPostButton" class="login_button" onClick="showTextarea(); theBox(true, 'newPostArea', ''); theBox(false, 'month', 'showBtn');" title="New Note"><img src="resources/newPostIcon.png"></img></button>
+			</td>
+			<td id="newPicIcon">
+				<button id="newPicIcon" class="login_button" onClick="showPicArea(); theBox(true, 'newPicArea', ''); theBox(false, 'month', 'showBtn');" title="New Pic"><img src="resources/newPic.png"></img></button>
 			</td>
 			<td>
 				<span id="notifications"></span>

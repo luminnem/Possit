@@ -34,7 +34,7 @@ function randomFromTo(from, to){
 			/* get container position and size
 			 * -- access method : cPos.top and cPos.left */
 			var cPos = $('#'+container).offset();
-			var cHeight = $('#'+container).height();
+			var cHeight = $('#'+container).height() / 2;
 			var cWidth = $('#'+container).width();
 			
 			// get box padding (assume all padding have same value)
