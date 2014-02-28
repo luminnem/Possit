@@ -31,15 +31,15 @@
     max-height: 100%;
 }
 
-.post-it #pin {
+.drag-post-it #pin {
     float: left;
 }
 
 .line {
     margin: 5px;
-    height: 0;
-    border-bottom: 1px #bbb solid;
-    border-top: 1px rgba(255, 255, 255, 0.4) solid;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px rgba(255, 255, 255, 0.5) solid;
 }
 
 .scroll-box::-webkit-scrollbar {

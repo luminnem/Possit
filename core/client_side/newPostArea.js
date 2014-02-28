@@ -9,20 +9,25 @@ function hideTextarea() {
 	textarea.style.display = "none";
 }
 
-
-
-function checkPostData() {
+function checkPostData(userID) {
 	var area = document.getElementById("postAreaText").value;
+	var userID = userID;
 	
 	if (area.length > 0) {
-		sendPost(area);
+		if (userID != "")  sendPost(area, userID);
+		else sendPost(area, "");
 	} else {
-		var notifications = document.getElementById("notifications");
-		notifications.style.display = "inline-block";
-		notifications.innerHTML = "No enough characters";
+		/*var notifications = document.getElementById("notifications");
+		notifications.style.display = "inline-block";*/
+		showMsg("No enough characters!");
 	}
+	
+		
+	var ta = document.getElementById("postAreaText");
+	ta.value = "";
+	
 }
-function sendPost(area) {
+function sendPost(area, userID) {
 
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -34,22 +39,22 @@ function sendPost(area) {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			/*RESPUESTA*/
 			var response = xmlhttp.responseText;
-			var notifications = document.getElementById("notifications");
+			/*var notifications = document.getElementById("notifications");
 			
 			notifications.style.display = "inline-block";
-			
+			*/
 			if (response == "1") {
-
-				notifications.innerHTML = "Post sent";
+				showMsg("Post sent!");
 			} else {
-				notifications.innerHTML = xmlhttp.responseText;
+				showMsg(xmlhttp.responseText);
 			}
-			hideTextarea();
+			theBox(false, "newPostArea", "");
 			
 		}
 	}
 	
 	xmlhttp.open("POST", "core/server_side/sendPost.php", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xmlhttp.send("data="+area);
+	if (userID != "") xmlhttp.send("data="+area+"&to="+userID);
+	else xmlhttp.send("data="+area);
 }

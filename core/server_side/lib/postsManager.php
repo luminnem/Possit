@@ -1,4 +1,5 @@
 <?php
+require_once("/core/server_side/lib/postitColor.php");
 
 class PostsManager {
     
@@ -8,34 +9,50 @@ class PostsManager {
         $this->connection = $connection;
     }
     
-    
-    public function getPost($postID, $usersManager, $rc="", $clr="") {
-        $query = "SELECT ID, user, body FROM posts WHERE id='$postID' LIMIT 1";
+	public function getPost($postID, $usersManager, $color, $usernameColor, $title, $closeButton=false) {
+		$query = "SELECT type FROM posts WHERE id='$postID' LIMIT 1";
+		$q = mysql_query($query, $this->connection);
+		
+		$d = mysql_fetch_assoc($q);
+		$type = mysql_real_escape_string($d['type']);
+		
+		switch ($type) {
+			case 1:
+				return $this->getTextPost($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
+				break;
+			case 2:
+				return $this->getPicture($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
+				break;
+		}
+		
+	}
+	
+    private function getTextPost($postID, $usersManager, $clr, $usernameColor, $title, $closeButton) {
+        $query = "SELECT user, body FROM posts WHERE id='$postID' LIMIT 1";
         $q = mysql_query($query, $this->connection) or die(mysql_error());
         
+        $color = $clr;
+		$bcolor = Brightness($color, 60);
+        
         while ($d = mysql_fetch_assoc($q)) {
-			if ($clr == "") {
-			    $color = $rc->getRandomColor();
-			} else {
-				$color = $clr;
-			}
 			
-			$dcolor = Brightness($color, 30);
-			
-			$string = "<div class='drag-post-it' style='background: $color;
-						background: -moz-linear-gradient(to top, $dcolor 0&#37, $color 100&#37);
-						background: linear-gradient(to top, $dcolor 0&#37, $color 100&#37)'>
-						<img id='pin' src='/resources/pin.png'>
+				$string = "<div onmousedown='bringFront(this)' id='post' class='drag-post-it' title='$title' style='background: $color; background: linear-gradient(to top $color $bcolor);'>";
+				$string_2 = "<img id='pin' src='/resources/pin.png'>
 						<a href='#'><span class='month_comments'>%s</span></a><div class='line'></div>
-						<a href='profile.php?id=%d'><span class='username_comments'>%s</span></a>";
+						<a href='profile.php?id=%d' style='color: $usernameColor !important;'><span class='username_comments'>%s</span></a>";
 			
-			$buttons = "<button class='button_comments' id='$d[ID]' onClick='upVote(this)'><img src='resources/upvote.png' title='Fluffy :3'></img></button>
-			<button class='button_comments' id='$d[ID]' onClick='downVote(this)'><img src='resources/downvote.png' title='WTF?'></img></button>";
+			$buttons = "<button class='button_comments' id='$postID' onClick='upVote(this)'><img src='resources/upvote.png' title='Fluffy'></img></button>
+			<button class='button_comments' id='$postID' onClick='downVote(this)'><img src='resources/downvote.png' title='Worse than a poop'></img></button>";
 			
 			$close_div = "</div>";
 			
+			$close_button = "<button onClick='deleteComment($postID)'>X</button>";
+			
 			if (isset($_SESSION['id'])) {
-				$string .= $buttons . $close_div;
+				if ($_SESSION['id'] == $d['user'] && $closeButton) {
+						$string .= $close_button;
+				}
+				$string .= $string_2 . $buttons . $close_div;
 			} else {
 				$string .= $close_div;
 			}
@@ -45,5 +62,38 @@ class PostsManager {
 			return sprintf($string, $blankline, $d['user'], $usersManager->getUsername($d['user']));
         }
     }
-
+	
+	private function getPicture($picID, $userManager, $color, $usernameColor, $title, $closeButton) {
+		$query = "SELECT posts.user as userID, posts.body as url, posts_captions.caption as caption FROM posts LEFT JOIN posts_captions
+			ON (posts_captions.post=posts.id) WHERE posts.id='$picID' LIMIT 1";
+		
+		$q = mysql_query($query, $this->connection) or die ("Lib error, couldn't load that pic ");
+		
+		$bcolor = Brightness($color, 60);
+		$d = mysql_fetch_assoc($q);
+		$caption = base64_decode($d['caption']);
+		$string = "<div onmousedown='bringFront(this)' id='post' class='polaroid' title='$title' style='background: $color; background: linear-gradient(to top $color $bcolor);'>
+						<img src='%s' alt='%s' width='200' height='200' title='$caption'></img>
+						<span>%s</span>
+						<div class='line'></div>
+						<a href='profile.php?id=%d' style='color: $usernameColor !important;'><span class='username_comments'>%s</span></a>";
+				
+		$buttons = "<button class='button_comments' id='$picID' onClick='upVote(this)'><img src='resources/upvote.png' title='Fluffy'></img></button>
+			<button class='button_comments' id='$picID' onClick='downVote(this)'><img src='resources/downvote.png' title='Worse than a poop'></img></button>";
+			
+		$close_div = "</div>";
+			
+		if (isset($_SESSION['id'])) {
+			$string .= $buttons . $close_div;
+		} else {
+			$string .= $close_div;
+		}
+		
+		
+		$url = base64_decode($d['url']);
+		$username = $userManager->getUsername($d['userID']);
+		$caption = stripslashes(base64_decode($d['caption']));
+		
+		return sprintf($string, $url, $caption, $caption, $d['userID'], $userManager->getUsername($d['userID']));
+	}
 }

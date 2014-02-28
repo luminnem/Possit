@@ -1,3 +1,16 @@
+function showMsg(text) {	
+	var el = document.getElementById("msger");
+	el.style.bottom = "-50px";
+	
+	el.innerHTML = "&nbsp;&nbsp;<img src='/resources/warning.png'><span style='color:#1C1C1C;font:14px Helvetica;'>&nbsp;" + text + "</span>";
+	
+	setTimeout(function() {
+		el.style.bottom = "0";
+	}, 2);
+	setTimeout(function() {
+		el.style.bottom = "-50px";
+	}, 4000);
+}
 function theBox(state, box_id, btn_id) {
     var box = document.getElementById(box_id);
     var btn = document.getElementById(btn_id);
@@ -22,47 +35,56 @@ function theBox(state, box_id, btn_id) {
         setTimeout(function() {
             box.style.top = "0";
             box.style.opacity = "100";
-        }, 500);
+        }, 100);
     }
 }
+
+var zindex = 10;
 
 function randomFromTo(from, to){
 			return Math.floor(Math.random() * (to - from + 1) + from);
 		}
-  
-		function moveRandom(obj, container) {
-			/* get container position and size
-			 * -- access method : cPos.top and cPos.left */
-			var cPos = $('#'+container).offset();
-			var cHeight = $('#'+container).height() / 2;
-			var cWidth = $('#'+container).width();
-			
-			// get box padding (assume all padding have same value)
-			var pad = parseInt($('#'+container).css('padding-top').replace('px', ''));
-			
-			// get movable box size
-			var bHeight = obj.height();
-			var bWidth = obj.width();
-			
-			// set maximum position
-			maxY = cHeight - bHeight - pad;
-			maxX = cWidth - bWidth - pad;
-			
-			// set minimum position
-			minY = 100 + pad;
-			minX = 20 + pad;
-			
-			// set new position			
-			newY = randomFromTo(minY, maxY);
-			newX = randomFromTo(minX, maxX);
-			
-			obj.animate({
-				top: newY,
-				left: newX
-				}, 300, function() {
-          moveRandom(obj);
-			});
-		}
+
+function bringFront(obj) {
+	obj.style.zIndex = ++zindex;
+}
+
+function moveRandom(obj, container) {
+	/* get container position and size
+	 * -- access method : cPos.top and cPos.left */
+	var cPos = $('#'+container).offset();
+	var cHeight = $(window).height() / 2;
+	var cWidth = $(window).width();
+	
+	// get box padding (assume all padding have same value)
+	var pad = parseInt($('.drag-post-it').css('padding-top').replace('px', ''));
+	//var pad = 0;
+	
+	// get movable box size
+	var bHeight = obj.height();
+	var bWidth = obj.width();
+	
+	// set maximum position
+	maxY = cHeight - bHeight - pad;
+	maxX = cWidth - bWidth - pad;
+	
+	// set minimum position
+	minY = 100 + pad;
+	minX = 20 + pad;
+	
+	// set new position			
+	newY = randomFromTo(minY, maxY);
+	newX = randomFromTo(minX, maxX);
+	
+	obj.animate({
+		top: newY,
+		left: newX
+		}, 300);
+	
+	if (obj.offset().top > cHeight) {
+		obj.offset({top: cHeight - bHeight, left: newX});
+	}
+}
 
 function Rand (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;

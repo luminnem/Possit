@@ -12,20 +12,25 @@ function hidePicArea() {
 
 
 
-function checkPicData() {
+function checkPicData(userID) {
 	var url = document.getElementById("picAreaUrl").value;
 	var caption = document.getElementById("newPicCaption").value;
-	
+
 	if (url.length > 0 && caption.length > 0) {
-		sendPic(url, caption);
+		if (userID != "") sendPic(url, caption, userID);
+		else sendPic(url, caption);
 		
 	} else {
-		var notifications = document.getElementById("notifications");
-		notifications.style.display = "inline-block";
-		notifications.innerHTML = "No enough characters";
+/*		var notifications = document.getElementById("notifications");
+		notifications.style.display = "inline-block";*/
+		showMsg("No enough characters");
 	}
+		
+	var ta = document.getElementById("picAreaUrl");
+	ta.value = "";
+	
 }
-function sendPic(url, caption) {
+function sendPic(url, caption, userID) {
 
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -37,22 +42,19 @@ function sendPic(url, caption) {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			/*RESPUESTA*/
 			var response = xmlhttp.responseText;
-			var notifications = document.getElementById("notifications");
-			
-			notifications.style.display = "inline-block";
-			
-			if (response == "1") {
 
-				notifications.innerHTML = "Pic sent";
+			if (response == "1") {
+				showMsg("Picture sent!");
 			} else {
-				notifications.innerHTML = xmlhttp.responseText;
+				showMsg(xmlhttp.responseText);
 			}
-			hidePicArea();
+			theBox(false, "newPicArea", "");
 			
 		}
 	}
 	
 	xmlhttp.open("POST", "core/server_side/sendPic.php", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xmlhttp.send("url="+url+"&caption="+caption);
+	if (userID != "") xmlhttp.send("url="+url+"&caption="+caption+"&to="+userID);
+	else xmlhttp.send("url="+url+"&caption="+caption);
 }

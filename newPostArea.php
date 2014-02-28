@@ -1,22 +1,4 @@
 <style>
-#newPostArea textarea {
-    background: #FEFDCA;
-	background: -moz-linear-gradient(to top, #FFFFF0 0%, #FEFDCA 100%);
-	background: linear-gradient(to top, #FFFFF0 0%, #FEFDCA 100%);
-    
-	padding:15px; 
-    font-family: 'Nothing You Could Do', Arial;
-    font-size: 20px;
-    color: #000; 
-    width:250px; 
-    margin: 12px;
-
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    resize: none;
-}
-
 .postAreaButton {
 	background-color: transparent;
 	border: 0;
@@ -48,13 +30,37 @@
     height: 5px;
     
 }
-</style>
 
+.note-text {
+    background: #FEFDCA;
+	background: -moz-linear-gradient(to top #FFFFF0 0% #FEFDCA 100%);
+	background: linear-gradient(to top #FFFFF0 0% #FEFDCA 100%);
+    
+	padding:15px;
+    font-family: 'Nothing You Could Do', Arial;
+    font-size: 20px;
+    color: #000; 
+    width:250px; 
+    margin: 12px;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    resize: none;
+    
+    border: none;
+}
+</style>
 <div id="newPostArea" class="scroll-box">
         <a style="float:right;" href="javascript:void(0)" title="Close" onClick="theBox(false, 'newPostArea', '')"><img src="/resources/close.png"></a>
 		<p id="title">New note</p>
-		<textarea cols="29" rows="9" maxLength="270" id="postAreaText"></textarea>
+		<textarea class="note-text" cols="29" rows="9" maxLength="270" id="postAreaText"></textarea>
 		<p>
-		    <button class="login_button_big" title="Post it" onClick="checkPostData();">Send</button>
+		<?php
+			if (curPageName() == "profile.php") {
+				$postUserId = mysql_real_escape_string($_GET['id']);
+			}
+		?>
+		    <button class="login_button_big" title="Post it" onClick="checkPostData(<?php if (isset($postUserId)) echo $postUserId; else echo ""; ?>);">Send</button>
 		</p>
 </div>

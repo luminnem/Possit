@@ -31,58 +31,49 @@ label {
 
 #sitetitle {
 		/*float: left;*/
-		width: 60%;
-		display: table-cell;
+		margin-left: 70px;
+		margin-top: -2px;
+/*		display: table-cell;*/
 }
-#sitetitle h1 {
+#sitetitle #title {
+		float: left;
 		margin: 0;
 		padding:0;
-    font-size: 60px;
-		font-style: italic;
+    	font-size: 48px !important;
+    	font-family: sans !important;
+		font-style: italic !important;
 		
-		color: #0099ff;
+		color: #FFF !important;
 		
 		text-align: right;
 		
 		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-		margin-top: 5px;
+}
+
+#login_fields {
+	margin-left: 10px;
+	margin-top: 8px;
 }
 #login_area {
-		 float: right;
-		 display: table-cell;
-		 width: 45%;
-		 /*height: auto;*/
-		 min-height: 70px;
-		 
-		 padding: 8px;
-
-	   background: #0099ff;
-		 
-		 border-top-left-radius: 50px;
-		 border-bottom-left-radius: 50px;
-
-		 box-shadow: -4px 0 4px rgba(0, 0, 0, 0.2);
-		 -moz-box-shadow: -4px 0 4px rgba(0, 0, 0, 0.2);
+	float: right;
+	margin-top: 2px;
+	display: table-cell;
+	vertical-align: middle;
 }
-#login_fields {
-		margin-left: 10px;
-		margin-top: 8px;
-}
-
 .login_textbox {
-		border: none;
-		border: 1px solid #aaa;
+	border: none;
+	border: 1px solid #aaa;
 		
-		box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 		
-		border-radius: 15px;
-		padding: 5px;
-		text-indent: 10px;
+	border-radius: 15px;
+	padding: 5px;
+	text-indent: 10px;
 		
-		width: 28%;
+	width: 28%;
 		
-		font: 14px Helvetica;
+	font: 14px Helvetica;
 }
 .textbox {
 	border: 1px solid #aaa;
@@ -182,11 +173,6 @@ input {
 }
 
 #contents {
-    position: absolute;
-    top: 44%;
-    
-    /*height: 70px; min-height: 70px;*/
-    
 	width: 100%;
 		
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
@@ -194,7 +180,10 @@ input {
 		
 	padding-top: 1px; padding-bottom: 1px;
 		
-	background: #fff;
+	background: rgba(0, 153, 255, 0.8);
+	
+	display: table;
+	overflow: hidden;
 }
 
 #error {

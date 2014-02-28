@@ -2,7 +2,6 @@
 	position: relative;
 	top: 50px;
 	left: 40%;
-	background: #fff;
 	width: 200px;
 	padding: 7px;
 	margin: 10px;
@@ -10,4 +9,6 @@
 	-moz-box-shadow: 1px 1px 3px #222;
 	-webkit-box-shadow: 1px 1px 3px #222;
 	box-shadow: 1px 1px 3px #222;
+	font-family: 'Nothing You Could Do', Arial;
+    font-size: 20px;
 }

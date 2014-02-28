@@ -39,10 +39,6 @@ include "core/server_side/lib/usersManager.php";
 			<?php 
 				if (!isset($_SESSION["id"])) {
 					include "login_banner.php";
-					require_once "core/server_side/lib/RandBG.php";
-					
-					PutRandomBG();
-					
 				} else {
 					include "main_banner.php";
 				}

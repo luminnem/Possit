@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <?php
 	session_start();
-	//require_once("core/server_side/data.php");
 	
 ?>
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
 	<head>
 		<title>Posit</title>
 		<link rel="stylesheet" type="text/css" href="styles/main_page.css">
-		<link rel="stylesheet" type="text/css" href="styles/login_banner.css">
+<!--		<link rel="stylesheet" type="text/css" href="styles/login_banner.css">-->
 		<link rel="stylesheet" type="text/css" href="styles/general.css">
 		<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
 		<link href="styles/main_banner.css" rel="Stylesheet" type="text/css">
@@ -17,7 +16,6 @@
 		<link href="styles/pictures.css" rel="Stylesheet" type="text/css">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-        
 		<script type="text/javascript" src="core/client_side/log_in.js"></script>
 		<script type="text/javascript" src="core/client_side/profile.js"></script>
 		<script type="text/javascript" src="core/client_side/newPostArea.js"></script>
@@ -33,15 +31,13 @@
         <script type="text/javascript" src="core/client_side/drag.js"></script>
 		
 	</head>
-	<body style="background: #E1F0FA">
+	<body>
+	
 		<div id="ban">
 			<?php 
 				if (!isset($_SESSION["id"])) {
 					include "login_banner.php";
-					require_once "core/server_side/lib/RandBG.php";
-					
-					PutRandomBG();
-					
+
 				} else {
 					include "main_banner.php";
 				}
@@ -52,12 +48,11 @@
 				include "postsAreas.php";
 			?>
 			
+			<div id="msger"></div>
 			<div id="topComments">
 				<?php
 				include "topComments.php";
 				?>
-				
-				
 			</div>
 		</div>
 	</body>

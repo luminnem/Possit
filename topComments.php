@@ -1,67 +1,58 @@
 <?php
 	include("core/server_side/lib/usersManager.php");
 	include("core/server_side/lib/postsManager.php");
-	include("core/server_side/lib/picsManager.php");
 	require_once("core/server_side/data.php");
+	
+	$usersManager = new UsersManager($connection);
+	$postsManager = new PostsManager($connection);
 ?>
 
 <link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript" src="/core/client_side/usefulTools.js"></script>
 
-<html>
-<body onLoad="theBox(false, 'month', 'showBtn')">
-</body>
-</html>
-
-<div id="showBtn">
-    <a href="javascript:void(0)" title="Show top Comments" onClick="theBox(true, 'month', 'showBtn'); theBox(false, 'newPostArea', '');"><center><img src="/resources/top_com_btn.png"></center></a>
+<div id="fluffy_things">
+	<?php
+		
+		$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='2' ORDER BY score DESC LIMIT 5";
+		$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
+		while ($d = mysql_fetch_assoc($q)) {
+			$postID = $d['id'];
+			echo $postsManager->getPost($postID, $usersManager, "#FE2E64", "#FFF", "One of the best pics this month");
+		}
+		
+		$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='1' ORDER BY score DESC LIMIT 5";
+		$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
+		while ($d = mysql_fetch_assoc($q)) {
+			$postID = $d['id'];
+			echo $postsManager->getPost($postID, $usersManager, "#64FE2E", "#FFF", "One of the best posts this month");
+		}
+		
+		if(!isset($_SESSION['id'])) {
+			$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) ORDER BY score DESC LIMIT 5";
+			$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
+			while ($d = mysql_fetch_assoc($q)) {
+				$postID = $d['id'];
+				echo $postsManager->getPost($postID, $usersManager, "#38ACEC", "#FFF", "Latest things");
+			}
+		}
+	?>
 </div>
 
-<!--<div id="month" class="scroll-box">
-        
-        <a style="float:right;" href="javascript:void(0)" title="Close" onClick="theBox(false, 'month', 'showBtn')"><img src="/resources/close.png"></a>
-		<p>Fluffy Things</p>
-		<?php 
-		    require("core/server_side/lib/postitColor.php");
-		    
-		    // PostIt Colors, add more!
-		    $colors = array("#FEFDCA", "#E9E74A", "#D0E17D", "#56C4E8", "#CDDD73", "#99C7BC", "#F9D6AC", "#BAB7A9", "#AAAAAA");
-		    $rc = new RandomColor($colors);
-		    
-			$query_string = "SELECT id, type FROM posts WHERE DAY(post_date) = DAY(CURDATE()) ORDER BY score DESC LIMIT 5";
-			$q = mysql_query($query_string, $connection);
-			$usersManager = new UsersManager($connection);
-			$postsManager = new PostsManager($connection);
-			$picsManager = new PicturesManager($connection);
-			
-			while ($d = mysql_fetch_assoc($q)) {
-				switch($d['type']) {
-				case 1:
-					echo $postsManager->getPost($d['id'], $usersManager, $rc);
-					break;
-				case 2:
-					echo $picsManager->getPicture($d['id'], $usersManager);
-					break;
-				}
-			}
-		?>
-</div>-->
-
-<div id="friends">
+<div id="friends" style="width: 100%; height: 50%;">
 	<script>	
 		$(function() {
 			$( ".drag-post-it" ).draggable();
 			
 			$( ".drag-post-it" ).each(function() {
-				moveRandom($(this), "topComments");
+				moveRandom($(this), "friends");
 			});
 			
 			
 			$( ".polaroid" ).draggable();
 			
 			$( ".polaroid" ).each(function() {
-				moveRandom($(this), "topComments");
+				moveRandom($(this), "friends");
 			});
 		});
 		
@@ -70,27 +61,18 @@
 		if (isset($_SESSION['id'])) {
 				$userID = mysql_real_escape_string($_SESSION['id']);
 				
-				$query = "SELECT posts.id as postID,
-					posts.user as user,
-					posts.type as type
+				$query = "SELECT posts.id as postID
 					FROM users_connections
 					LEFT JOIN posts ON (posts.user=users_connections.user_2)
 					WHERE users_connections.user_1='$userID'
-					ORDER BY SCORE DESC
+					ORDER BY post_date DESC
 					LIMIT 10";
+					
 				$q = mysql_query($query, $connection) or die (mysql_error());
 				while ($d = mysql_fetch_assoc($q)) {
 					$postID = $d['postID'];
-					$userID = $d['user'];
-					$type = $d['type'];
-					switch($type) {
-						case 1:
-							echo $postsManager->getPost($postID, $usersManager, $rc);
-							break;
-						case 2:
-							echo $picsManager->getPicture($postID, $usersManager);
-							break;
-					}
+					
+					echo $postsManager->getPost($postID, $usersManager, "#F4FA58", "#0CD", "Latest from who you follow");
 				}
 		}
 	?>

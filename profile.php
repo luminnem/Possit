@@ -5,9 +5,6 @@
 	include("core/server_side/lib/usersManager.php");
 	include("core/server_side/lib/postsManager.php");
 	include("core/server_side/lib/picsManager.php");
-    require("core/server_side/lib/postitColor.php");
-	
-	
 ?>
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
 	<head>
@@ -19,7 +16,6 @@
 		<link rel="Stylesheet" type="text/css" href="styles/main_banner.css" >
 		<link rel="Stylesheet" type="text/css" href="styles/profile.css">
         <link rel="stylesheet" type="text/css" href="styles/main_page.css">
-		<link rel="stylesheet" type="text/css" href="styles/login_banner.css">
 		<link rel="stylesheet" type="text/css" href="styles/general.css">
 		<link rel="stylesheet" type="text/css" href="styles/pictures.css">
 		<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
@@ -34,13 +30,14 @@
 		<script type="text/javascript" src="core/client_side/topComments.js"></script>
 		<script type="text/javascript" src="core/client_side/newPicArea.js"></script>
 		<script type="text/javascript" src="core/client_side/usefulTools.js"></script>
+		<script type="text/javascript" src="core/client_side/posts_utils.js"></script>
 		
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.9.1.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script type="text/javascript" src="core/client_side/drag.js"></script>
 	</head>
-	<body style="background: #E1F0FA">
+	<body>
 		<div id="ban">
 			<?php 
 				if (!isset($_SESSION["id"])) {
@@ -56,6 +53,9 @@
 			?>
 			<?php
 				$userManager = new UsersManager($connection);
+				$picturesManager = new PicturesManager($connection);
+				$postsManager = new PostsManager($connection);
+				
 				$userID = mysql_real_escape_string($_GET['id']);
 				$username = $userManager->getUsername($userID);
 				
@@ -120,26 +120,35 @@
 			</script>
 			<?php
 			
-				//TEXT POSTS
-				$colors = array("#FEFDCA", "#E9E74A", "#D0E17D", "#56C4E8", "#CDDD73", "#99C7BC", "#F9D6AC", "#BAB7A9");
-				$rc = new RandomColor($colors);
-				$postsManager = new PostsManager($connection);
-				
-				$query = "SELECT id FROM posts WHERE user='$userID' AND type='1' ORDER BY SCORE DESC LIMIT 100";
-				$q = mysql_query($query, $connection) or die("Best posts couldn't be loaded");
-				
-				while($d = mysql_fetch_assoc($q)) {
-					echo $postsManager->getPost($d['id'], $userManager, $rc);
+				//LATEST FROM ME
+				$query = "SELECT id FROM posts WHERE user='$userID' ORDER BY post_date DESC LIMIT 5";
+				$q = mysql_query($query, $connection) or die("Your posts couldn't be loaded");
+				while ($d = mysql_fetch_assoc($q)) {
+					$id = $d['id'];
+					echo $postsManager->getPost($id, $userManager, "#0CD", "#FFF", "Latest from this user");
 				}
-				
-				//PICTURES
-				$picturesManager = new PicturesManager($connection);
-				$pictures_query = "SELECT id FROM posts WHERE user='$userID' AND type='2' ORDER BY SCORE DESC LIMIT 5";
-				$q = mysql_query($pictures_query, $connection) or die ("Best pictures couldn't be loaded");
-				while($d = mysql_fetch_assoc($q)) {
-					echo $picturesManager->getPicture($d['id'], $userManager);
+				//LATEST FROM WHAT I LIKE
+				$query = "SELECT posts.id as id FROM votes LEFT JOIN posts ON (posts.id=votes.post) WHERE votes.user='$userID' AND vote='1' ORDER BY posts.score DESC LIMIT 5";
+				$q = mysql_query($query, $connection) or die("Your posts couldn't be loaded");
+				while ($d = mysql_fetch_assoc($q)) {
+					$id = $d['id'];
+					echo $postsManager->getPost($id, $userManager, "#64FE2E", "#FFF", "Latest from what I like");
 				}
-			?>
+				//BEST THINGS FOR ME
+				$query = "SELECT id FROM posts WHERE user='$userID' ORDER BY score DESC LIMIT 5";
+				$q = mysql_query($query, $connection) or die("Your posts couldn't be loaded");
+				while ($d = mysql_fetch_assoc($q)) {
+					$id = $d['id'];
+					echo $postsManager->getPost($id, $userManager, "#FE2E64", "#FFF", "Best things of this user");
+				}
+				//COMMENTS
+				$query = "SELECT post FROM users_replies WHERE user='$userID' LIMIT 10";
+				$q = mysql_query($query, $connection) or die("Comments from this user couldn't be loaded");
+				while($d = mysql_fetch_assoc($q)) {
+					$id = $d['post'];
+					echo $postsManager->getPost($id, $userManager, "#FFF", "#000", "Notes left to this user", true);
+				}
+				?>
     		</div>
 		</div>
 	</body>

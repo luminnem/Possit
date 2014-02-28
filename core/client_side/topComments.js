@@ -16,18 +16,18 @@ function sendVote(id, option) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			/*RESPONSE*/
-			var notification = document.getElementById('notifications');
+			//var notification = document.getElementById('notifications');
 			var response = xmlhttp.responseText;
-			notification.style.display = "inline-block";
+			//notification.style.display = "inline-block";
 			
 			if (response == "1") {
-				notification.innerHTML = 'You voted +1';
+				showMsg('You voted +1');
 			} else if (response == "2") {
-				notifications.innerHTML = 'You vouted -1';
+				showMsg('You vouted -1');
 			} else if (response == "3") {
-				notifications.innerHTML = "You've already voted this post";
+				showMsg("You've already voted this post");
 			} else {
-				notification.innerHTML = response;
+				showMsg(response);
 			}
 		}
 	}
