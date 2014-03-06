@@ -3,21 +3,20 @@ session_start();
 require_once("core/server_side/data.php");
 include "core/server_side/lib/usersManager.php";
 ?>
-
+<!DOCTYPE HTML>
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
 	<head>
 		<title>Posit</title>
 		<link rel="stylesheet" type="text/css" href="styles/main_page.css">
 		<link rel="stylesheet" type="text/css" href="styles/login_banner.css">
 		<link rel="stylesheet" type="text/css" href="styles/general.css">
-		<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>
 		<link href="styles/main_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/login_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/comments.css" rel="Stylesheet" type="text/css">
 		<link href="styles/pictures.css" rel="Stylesheet" type="text/css">
 		<link href="styles/search.css" rel="Stylesheet" type="text/css">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
         
 		<script type="text/javascript" src="core/client_side/log_in.js"></script>
 		<script type="text/javascript" src="core/client_side/profile.js"></script>

@@ -1,15 +1,3 @@
-<?php
-	include("core/server_side/lib/usersManager.php");
-	include("core/server_side/lib/postsManager.php");
-	require_once("core/server_side/data.php");
-	
-	$usersManager = new UsersManager($connection);
-	$postsManager = new PostsManager($connection);
-?>
-
-<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
-
-<script type="text/javascript" src="/core/client_side/usefulTools.js"></script>
 
 <div id="fluffy_things">
 	<?php

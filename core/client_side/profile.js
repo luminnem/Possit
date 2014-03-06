@@ -1,8 +1,12 @@
 function showProfileForm() {
+    var form = document.getElementById("modifyProfileForm");
+    form.style.display = "inline-block";
+    
+    /*
     var form = document.getElementById("profileForm");
     form.style.display = "inline-block";
     var buttons = document.getElementsByClassName("editProfileButton");
-    buttons[0].style.display = "none";
+    buttons[0].style.display = "none";*/
 }
 
 function closeProfileForm() {
@@ -13,13 +17,18 @@ function closeProfileForm() {
 }
 
 
-function checkProfileFormValues() {
-    var description = document.getElementById("profileForm_description").value;
-    var notifications = document.getElementById("notifications");
-    updateProfileForm(description, notifications);
+function check_modify_profile_form() {
+    
+    var description = document.getElementById("modify_profile_description").value;
+    var profile_picture = document.getElementById("modify_profile_img_url").value;
+    
+    if (description != "" || profile_picture != "") {
+        updateProfile(description, profile_picture);
+    }
+    
 }
 
-function updateProfileForm(description, notifications) {
+function updateProfile(description, profile_picture) {
     
     if (window.XMLHttpRequest) {
         var xmlhttp = new XMLHttpRequest();
@@ -27,20 +36,25 @@ function updateProfileForm(description, notifications) {
     
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            //RESPONSE;
-            notifications = document.getElementById("notifications");
-            notifications.style.display = "inline-block";
+            /*RESPONSE*/
             var response = xmlhttp.responseText;
-            
             if (response == "1") {
-                notifications.innerHTML = "Profile updated correctly";
+                showMsg("Profile updated correctly");
             } else {
-                notifications.innerHTML = response;
+                showMsg(response);
             }
         }
     };
     
     xmlhttp.open("POST", "core/server_side/updateProfile.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.send("description="+description);
+    
+    
+    if (description == "") {
+        xmlhttp.send("profilePicture="+profile_picture);
+    } if (profile_picture == "") {
+        xmlhttp.send("description="+description);
+    } if (description != "" && profile_picture != "") {
+        xmlhttp.send("description="+description+"&profilePicture="+profile_picture);
+    }
 }

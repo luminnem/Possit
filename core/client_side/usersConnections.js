@@ -10,7 +10,8 @@ function follow(user) {
             notifications.style.display = "inline-block";
             var response = xmlhttp.responseText;
             if (response == "1") {
-                notifications.innerHTML = "You're following it now";
+                user.innerHTML = "Following!";
+                user.disabled = true;
             } else {
                 notifications.innerHTML = response;
             }

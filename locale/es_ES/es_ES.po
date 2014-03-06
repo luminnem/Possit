@@ -1,0 +1,154 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Posit\n"
+"POT-Creation-Date: 2014-03-01 19:06-0300\n"
+"PO-Revision-Date: 2014-03-01 19:15-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Diego\\Dropbox\\posit_folder\n"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:2
+msgid "Username"
+msgstr "Usuario"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:3
+msgid "Password"
+msgstr "Contraseña"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:4
+msgid "LogIn"
+msgstr "Conectarse"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:5
+msgid "or"
+msgstr "o"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:6
+msgid "Register"
+msgstr "Regístrate"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:7
+msgid "Incorrect data"
+msgstr "Datos incorrectos"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:8
+msgid "The only thing you need to start, what are you waiting for getting one?"
+msgstr ""
+"Lo único que necesita para empezar, ¿qué estás esperando para conseguir uno?"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:9
+msgid "Get a Posit ID"
+msgstr "Obtener una ID Posit"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:10
+msgid "Choose your username"
+msgstr "Elija su nombre de usuario"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:11
+msgid "Think a safe password"
+msgstr "Piense en una contraseña segura"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:12
+msgid "Write your e-mail address"
+msgstr "Escribe tu correo electrónico"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:13
+msgid "Get my ID"
+msgstr "Obtener mi ID"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:14
+msgid "Friends"
+msgstr "Amigos"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:15
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:16
+msgid "Search"
+msgstr "Buscar"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:17
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:26
+msgid "New note"
+msgstr "Nueva nota"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:18
+msgid "New picture"
+msgstr "Nueva imagen"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:19
+msgid "LogOut"
+msgstr "Desconectarse"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:20
+msgid "You've not set up your profile yet."
+msgstr "Usted no ha configurado su perfil aún."
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:21
+msgid "Set up profile"
+msgstr "Configurar perfil"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:22
+msgid "Worse than a poop"
+msgstr "No me gusta"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:23
+msgid "Fluffy"
+msgstr "Me gusta"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:24
+msgid "Follow"
+msgstr "Seguir"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:25
+msgid "Send"
+msgstr "Enviar"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:27
+msgid "New pic"
+msgstr "Nueva foto"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:28
+msgid "Caption"
+msgstr "Leyenda"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:29
+msgid "Picture url"
+msgstr "URL del imagen/GIF"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:30
+msgid "Note sent"
+msgstr "Nota enviada"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:31
+msgid "Picture sent"
+msgstr "Imagen enviada"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:32
+msgid "Close"
+msgstr "Cerrar"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:33
+msgid "matches"
+msgstr "resultados"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:34
+msgid "One of the best pics this month"
+msgstr "Una de las mejores imágenes de este mes"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:35
+msgid "One of the best posts this month"
+msgstr "Uno de los mejores posts de este mes"
+
+#: C:\Users\Diego\Dropbox\posit_folder/strings.php:36
+msgid "You voted"
+msgstr "Votáste"

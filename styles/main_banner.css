@@ -6,10 +6,11 @@ a {padding:0;margin:0;}
 /* ------------------------------------------------------------------------ */
 /* BANNER */
 /* ------------------------------------------------------------------------ */
+
 #banner_t {
 		width: 100%;
 		padding-right: 40px;
-		background: #0099ff;
+		background: rgba(0, 153, 255, 0.8);
 		
 		-moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
@@ -30,6 +31,16 @@ table tr {
 
 #title {
 		height: 50px;
+		float: left;
+		margin: 0;
+		padding: 0;
+		font-size: 48px !important;
+		font-family: sans !important;
+		font-style: italic !important;
+		color: #FFF !important;
+		text-align: right;
+		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+		margin-left: 30px;
 }
 #posit {
     font-family: serif;

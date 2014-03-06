@@ -7,7 +7,7 @@ function curPageName() {
 <table id="banner_t">
 	<tr>
 		<td id="title">
-			<a id="posit" href="index.php">Posit</a>
+			<a href="index.php"><span id="title">Posit</span></a>
 		</td>
 		<td id="user_buttons" class="banner_text">
 			<p>
@@ -32,7 +32,7 @@ function curPageName() {
 		</td>
 		<td id="current_user" class="banner_text">
 			<a class="banner_link" href="#">
-			<img src="../images/usr.jpg" alt="Me">
+				<?php echo $usersManager->getProfilePicture("$_SESSION[id]"); ?>
 				&nbsp;
 				<?php
 				$name = "<a href='profile.php?id=%d'>%s</a>";
