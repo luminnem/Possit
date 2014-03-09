@@ -74,3 +74,15 @@ input {
 #closeProfileFormButton {
     float: right;
 }
+
+#modifyProfileForm {
+    display: none;
+}
+  
+#modify_profile_description {
+    resize: none;
+}
+  
+#modify_profile_img_url {
+    
+}

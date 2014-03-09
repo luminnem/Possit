@@ -38,7 +38,6 @@
 		<script type="text/javascript" src="core/client_side/posts_utils.js"></script>
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="core/client_side/drag.js"></script>
 		
 	</head>
 	<body>
@@ -56,51 +55,51 @@
 		    <?php
 				include "postsAreas.php";
 				?>
-			<?php
-				$postsManager = new PostsManager($connection);
-				
-				$userID = mysql_real_escape_string($_GET['id']);
-				$username = $usersManager->getUsername($userID);
-				
-				$profile = "<div id='profile'>
-								<p id='profile_picture'>".$usersManager->getProfilePicture($userID)."</p>
-								<p id='profile_username'>".$username."</p>";
-				
-				if ($usersManager->getProfile($userID)) {
-					if ($userID == $_SESSION['id']) {
-						$profile .= "<button onClick='showProfileForm();' class='editProfileButton'>Edit profile</button>";
-						include "modifyProfileForm.php"; // FORM TO MODIFY THE PROFILE
+					<?php
+						$postsManager = new PostsManager($connection);
 						
-					} else {
-						if (isset($_SESSION['id'])) {
-							if (!$usersManager->checkIfFollowing($_SESSION['id'], $userID)) {
-								$profile .= "<button id='$userID' onClick='follow(this);' class='editProfileButton'>Follow</button>";
+						$userID = mysql_real_escape_string($_GET['id']);
+						$username = $usersManager->getUsername($userID);
+						
+						$profile = "<div id='profile'>
+										<p id='profile_picture'>".$usersManager->getProfilePicture($userID)."</p>
+										<p id='profile_username'>".$username."</p>";
+						
+						if ($usersManager->getProfile($userID)) {
+							if ($userID == $_SESSION['id']) {
+								$profile .= "<button onClick='showProfileForm();' class='editProfileButton'>Edit profile</button>";
+								include "modifyProfileForm.php"; // FORM TO MODIFY THE PROFILE
+								
+							} else {
+								if (isset($_SESSION['id'])) {
+									if (!$usersManager->checkIfFollowing($_SESSION['id'], $userID)) {
+										$profile .= "<button id='$userID' onClick='follow(this);' class='editProfileButton'>Follow</button>";
+									}
+								}
+							}
+							$description = $usersManager->getDescription($userID);
+							$spr = "<p id='profile_description'>%s</p>";
+							$profile .= sprintf($spr, $description);
+							
+						} else{
+							if ($userID == $_SESSION['id']) {
+								$profile .= "<p id='profile_description'>You've not set up your profile yet.</p>";
+								$profile .= "<button onClick='showProfileForm();' class='editProfileButton'>Set up profile</button>";
+								
+								include "modifyProfileForm.php"; // FORM TO MODIFY THE PROFILE
+							} else {
+								$profile .= "<p id='profile_description'>This user hasn't set up its profile yet.</p>";
+								if (isset($_SESSION['id'])) {
+									if (!$usersManager->checkIfFollowing($_SESSION['id'], $userID)) {
+										$profile .= "<button id='$userID' onClick='follow(this);' class='editProfileButton'>Follow</button>";
+									}
+								}
 							}
 						}
-					}
-					$description = $usersManager->getDescription($userID);
-					$spr = "<p id='profile_description'>%s</p>";
-					$profile .= sprintf($spr, $description);
-					
-				} else{
-					if ($userID == $_SESSION['id']) {
-						$profile .= "<p id='profile_description'>You've not set up your profile yet.</p>";
-						$profile .= "<button onClick='showProfileForm();' class='editProfileButton'>Set up profile</button>";
 						
-						include "modifyProfileForm.php"; // FORM TO MODIFY THE PROFILE
-					} else {
-						$profile .= "<p id='profile_description'>This user hasn't set up its profile yet.</p>";
-						if (isset($_SESSION['id'])) {
-							if (!$usersManager->checkIfFollowing($_SESSION['id'], $userID)) {
-								$profile .= "<button id='$userID' onClick='follow(this);' class='editProfileButton'>Follow</button>";
-							}
-						}
-					}
-				}
-				
-				$profile .= "</div>";
-				echo $profile;
-			?>
+						$profile .= "</div>";
+						echo $profile;
+					?>
 			<div id="topComments">
 			<script>
 				

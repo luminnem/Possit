@@ -89,3 +89,11 @@ function moveRandom(obj, container) {
 function Rand (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function scrolled() {
+	if ($(document).scrollTop() > 0) {
+		$('#banner_t').css("position", "fixed");
+	} else {
+		$('#banner_t').css("position", "static");
+	}
+}

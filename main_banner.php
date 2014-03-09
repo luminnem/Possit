@@ -3,7 +3,10 @@ function curPageName() {
 	return substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 }
 ?>
-
+<script>
+	scrolled();
+	$(window).scroll(function () { scrolled(); });
+</script>
 <table id="banner_t">
 	<tr>
 		<td id="title">

@@ -37,7 +37,7 @@
 	background: linear-gradient(to top #FFFFF0 0% #FEFDCA 100%);
     
 	padding:15px;
-    font-family: 'Nothing You Could Do', Arial;
+    font-family: 'Crafty Girls', Arial !important;
     font-size: 20px;
     color: #000; 
     width:250px; 

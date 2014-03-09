@@ -1,5 +1,5 @@
 <?php
-require_once("/core/server_side/lib/postitColor.php");
+require_once("postitColor.php");
 
 class PostsManager {
     
@@ -50,11 +50,11 @@ class PostsManager {
 			
 			if (isset($_SESSION['id'])) {
 				if ($_SESSION['id'] == $d['user'] && $closeButton) {
-						$string .= $close_button;
+						$string .= $close_button . $string_2 . $close_div;
 				}
 				$string .= $string_2 . $buttons . $close_div;
 			} else {
-				$string .= $close_div;
+				$string .= $string_2 . $close_div;
 			}
 			
 			$blankline = str_replace(".\endl", "<br />", base64_decode($d['body']));
