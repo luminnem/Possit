@@ -2,6 +2,7 @@
 session_start();
 require_once("core/server_side/data.php");
 include "core/server_side/lib/usersManager.php";
+$usersManager = new UsersManager($connection);
 ?>
 <!DOCTYPE HTML>
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
@@ -52,7 +53,7 @@ include "core/server_side/lib/usersManager.php";
 			$query = "SELECT ID FROM users WHERE username LIKE '%$toFind%' LIMIT 5";
 
 			$q = mysql_query($query, $connection) or die(mysql_error());
-			$usersManager = new UsersManager($connection);
+
 			
 			$numbers = "<p>%d matches</p>";
 			echo sprintf($numbers, mysql_num_rows($q));
