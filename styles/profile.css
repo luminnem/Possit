@@ -37,14 +37,16 @@
 }
 
 .editProfileButton {
-    float: left;
+    float: right;
     background: #0099ff;
     border: 0;
     border-top: 1px solid #99ccff;
-	border-bottom: 1px solid #336699;
+    border-bottom: 1px solid #336699;
     border-radius: 10px;
     margin-right: 20px;
     color: #fff;
+    position: relative;
+    top: -80px;
 }
 
 input {
