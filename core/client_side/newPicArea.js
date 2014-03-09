@@ -45,8 +45,10 @@ function sendPic(url, caption, userID) {
 
 			if (response == "1") {
 				showMsg("Picture sent!");
+			} else if (response == "2"){
+				showMsg("Ups an error ocurred");
 			} else {
-				showMsg(xmlhttp.responseText);
+				showMsg("You must enter a valid image url");
 			}
 			theBox(false, "newPicArea", "");
 			
