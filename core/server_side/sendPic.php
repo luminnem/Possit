@@ -9,6 +9,7 @@ if (getimagesize($_POST["url"])) {
 	$url = str_replace("\\'", ".\sinQuote", $url);
 	$url = base64_encode($url);
 	
+	
 	$caption = $_POST["caption"];
 	$caption = strip_tags($caption);
 	$caption = mysql_real_escape_string($caption);
@@ -23,9 +24,8 @@ if (getimagesize($_POST["url"])) {
 	
 	$query_string = "INSERT INTO posts(user, body, type) VALUES ('$by', '$url', '2')";
 	$query_2 = "INSERT INTO posts_captions(post, caption) VALUES (LAST_INSERT_ID(), '$caption')";
-	
-	$q_2 = mysql_query($query_2, $connection) or die("Ups... problem when sendint your pic");
 	$q = mysql_query($query_string, $connection) or die ("Ups... problem when sending your pic");
+	$q_2 = mysql_query($query_2, $connection) or die("Ups... problem when sendint your pic");
 	
 	if (isset($to)) {
 		$query = "INSERT INTO users_replies(user, post) VALUES ('$to', LAST_INSERT_ID())";

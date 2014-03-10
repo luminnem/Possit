@@ -31,7 +31,6 @@ function checkPicData(userID) {
 	
 }
 function sendPic(url, caption, userID) {
-
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
 	} else {
@@ -42,7 +41,7 @@ function sendPic(url, caption, userID) {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			/*RESPUESTA*/
 			var response = xmlhttp.responseText;
-
+			
 			if (response == "1") {
 				showMsg("Picture sent!");
 			} else if (response == "2"){
