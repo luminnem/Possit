@@ -55,10 +55,9 @@ function moveRandom(obj, container) {
 	var cPos = $('#'+container).offset();
 	var cHeight = $(window).height() / 2;
 	var cWidth = $(window).width();
-	
 	// get box padding (assume all padding have same value)
+	
 	var pad = parseInt($('.drag-post-it').css('padding-top').replace('px', ''));
-	//var pad = 0;
 	
 	// get movable box size
 	var bHeight = obj.height();
