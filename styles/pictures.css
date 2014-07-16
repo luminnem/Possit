@@ -1,7 +1,8 @@
 .polaroid {
-	position: relative;
-	top: 50px;
-	left: 40%;
+	position: absolute;
+	top: 0px;
+	left: 0%;
+	
 	width: 200px;
 	padding: 7px;
 	margin: 10px;

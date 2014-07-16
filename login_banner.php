@@ -1,6 +1,6 @@
 <div id="contents" style="display:block;; top: 0; z-index: 4;">
 	<div id="sitetitle">
-		<a href='index.php'><span id="title">Posit <span id="error">&alpha;lpha 0.2</span></span></a>
+		<a href='index.php'><span id="title">Posit <span id="error">&alpha;lpha 0.2.2</span></span></a>
 	</div>
 	<div id="login_area">
 		 <div id="login_fields">

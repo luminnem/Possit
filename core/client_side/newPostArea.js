@@ -14,7 +14,7 @@ function checkPostData(userID) {
 	var userID = userID;
 	
 	if (area.length > 0) {
-		if (userID != "" && userID != "p" && userID != "u")  sendPost(area, userID);
+		if (typeof userID !== 'undefined')  sendPost(area, userID);
 		else sendPost(area, "");
 	} else {
 		showMsg("No enough characters!");

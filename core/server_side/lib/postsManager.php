@@ -21,7 +21,8 @@ class PostsManager {
 				return $this->getTextPost($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
 				break;
 			case 2:
-				return $this->getPicture($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
+				//return $this->getPicture($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
+				return "";
 				break;
 		}
 		
@@ -71,7 +72,7 @@ class PostsManager {
 		$bcolor = Brightness($color, 60);
 		$d = mysql_fetch_assoc($q);
 		$caption = base64_decode($d['caption']);
-		$string = "<div onmousedown='bringFront(this)' id='post' class='polaroid' title='$title' style='background: $color; background: linear-gradient(to top $color $bcolor);'>
+		$string = "<div onmousedown='bringFront(this)' id='post' class='polaroid' title='$title' style='display:block; float:left; background: $color; background: linear-gradient(to top $color $bcolor);'>
 						<a href='post.php?id=%d'><img src='%s' alt='%s' width='200' height='200' title='$caption'></img>
 						<span>%s</span></a>
 						<div class='line'></div>
