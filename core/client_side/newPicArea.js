@@ -20,8 +20,6 @@ function checkPicData(userID) {
 		else sendPic(url, caption);
 		
 	} else {
-/*		var notifications = document.getElementById("notifications");
-		notifications.style.display = "inline-block";*/
 		showMsg("No enough characters");
 	}
 		

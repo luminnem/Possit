@@ -3,9 +3,12 @@
 	require_once("core/server_side/data.php");
 	include("core/server_side/lib/usersManager.php");
 	include("core/server_side/lib/postsManager.php");
+  include("core/server_side/lib/lab.php");
 	
 	$usersManager = new UsersManager($connection);
 	$postsManager = new PostsManager($connection);
+  $lab = new Lab($connection);
+	$logged = isset($_SESSION["id"]);
 ?>
 <!DOCTYPE HTML>
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
@@ -19,7 +22,7 @@
 		<!--Styles-->
 		<link rel="stylesheet" type="text/css" href="styles/main_page.css">
 		<link rel="stylesheet" type="text/css" href="styles/general.css">
-		<!--<link href='http://fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>
 		<link href="styles/main_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/login_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/comments.css" rel="Stylesheet" type="text/css">
@@ -35,29 +38,33 @@
 		<script type="text/javascript" src="core/client_side/newPicArea.js"></script>
 		<script type="text/javascript" src="core/client_side/usefulTools.js"></script>
 		<script type="text/javascript" src="core/client_side/search.js"></script>
-		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script type="text/javascript" src="core/client_side/lab.js"></script>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		
 		
 	</head>
 	<body>
 	
 		<div id="ban">
 			<?php 
-				if (!isset($_SESSION["id"])) {
+				if (!$logged) {
 					include "login_banner.php";
 
 				} else {
 					include "main_banner.php";
 					include "postsAreas.php";
+					echo "<div id='msger'></div>";
 				}
 			?>
 		</div>
-		<div id="body">
+		<div id='body'>
 			<?php
-				include "topComments.php";
+				if($logged) {
+					$postsManager->getRawUrls($lab->getPicturesWithoutCaption($_SESSION['id']));
+				}
 			?>
-			
-			<div id="msger"></div>
 		</div>
-	</body>
+    
+</body>
 </html>

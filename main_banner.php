@@ -16,7 +16,7 @@ function curPageName() {
 			<p>
 				<a style="font-size: 16px" class="banner_link" href="#">Friends</a>
 				&nbsp; &nbsp; &nbsp;
-				<a style="font-size: 16px" class="banner_link" href="#">Notifications</a>
+				<a style="font-size: 16px" class="banner_link" href="lab.php">Captions Lab</a>
 			</p>
 		</td>
 		<td>
@@ -25,11 +25,25 @@ function curPageName() {
 			</form>
 		</td>
 		<td style="width:32px" id="newPostIcon">
-			<button id="newPostButton" class="banner_button" onClick="showTextarea(); theBox(true, 'newPostArea', ''); theBox(false, 'month', 'showBtn');" title="<?php if (curPageName() == "profile.php") echo "Leave note to this user"; else echo "New note"; ?>"><img src="resources/new_note.png"></img></button>
+			<button id="newPostButton" class="banner_button" onClick="showTextarea(); theBox(true, 'newPostArea', ''); theBox(false, 'month', 'showBtn');" title="
+			<?php
+				if (curPageName() == "profile.php") echo "Leave note to this user";
+				else if (curPageName() == "post.php") echo "Leave reply";
+				else echo "New note"; 
+			?>
+			">
+			<img src="resources/new_note.png"></img></button>
 		</td>
-		<td style="width:32px" id="newPicIcon">
-			<button id="newPicIcon" class="banner_button" onClick="showPicArea(); theBox(true, 'newPicArea', ''); theBox(false, 'month', 'showBtn');" title="<?php if (curPageName() == "profile.php") echo "Leave picture to this user"; else echo "New picture"; ?>"><img src="resources/new_pic.png"></img></button>
-		</td>
+		<!--<td style="width:32px" id="newPicIcon">
+			<button id="newPicIcon" class="banner_button" onClick="showPicArea(); theBox(true, 'newPicArea', ''); theBox(false, 'month', 'showBtn');"
+			title="
+			<?php
+				if (curPageName() == "profile.php") echo "Leave picture to this user";
+				else if (curPageName() == "post.php") echo "Leave picture as reply";
+				else echo "New picture"; 
+			?>
+			"><img src="resources/new_pic.png"></img></button>
+		</td>-->
 		<td>
 			<span id="notifications"></span>
 		</td>

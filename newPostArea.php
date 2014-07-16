@@ -1,4 +1,9 @@
 <style>
+#send_post {
+	width: 275px;
+	height: 60px;
+	border-radius: 5px;
+}
 .postAreaButton {
 	background-color: transparent;
 	border: 0;
@@ -22,14 +27,6 @@
     max-height:100%;
     overflow:auto;
 }
-#newPostArea #title {
-    color: #555;
-    font: 22px Helvetica;
-    padding: 12px;
-    text-align: left;
-    height: 5px;
-    
-}
 
 .note-text {
     background: #FEFDCA;
@@ -37,8 +34,7 @@
 	background: linear-gradient(to top #FFFFF0 0% #FEFDCA 100%);
     
 	padding:15px;
-    font-family: 'Crafty Girls', Arial !important;
-    font-size: 20px;
+    font-family: Consolas, Arial !important;
     color: #000; 
     width:250px; 
     margin: 12px;
@@ -53,14 +49,27 @@
 </style>
 <div id="newPostArea" class="scroll-box">
         <a style="float:right;" href="javascript:void(0)" title="Close" onClick="theBox(false, 'newPostArea', '')"><img src="/resources/close.png"></a>
-		<p id="title">New note</p>
-		<textarea class="note-text" cols="29" rows="9" maxLength="270" id="postAreaText"></textarea>
+		<textarea class="note-text" cols="29" rows="9" maxLength="270" id="postAreaText" placeHolder="What the cat are you doing?"></textarea>
 		<p>
 		<?php
 			if (curPageName() == "profile.php") {
-				$postUserId = mysql_real_escape_string($_GET['id']);
+				$postUserId = mysql_real_escape_string($_GET["id"]);
+			} else if (curPageName() == "post.php") {
+				$postPostId = mysql_real_escape_string($_GET["id"]);
 			}
 		?>
-		    <button class="login_button_big" title="Post it" onClick="checkPostData(<?php if (isset($postUserId)) echo $postUserId; else echo ""; ?>);">Send</button>
+		    <button id="send_post" class="login_button_big" title="Post it" onClick="checkPostData(
+			<?php
+				if(isset($postUserId))
+				{
+					echo "'$postUserId"."u'";
+				}
+				else if(isset($postPostId))
+				{
+					echo "'$postPostId"."p'";
+				}
+				else echo ""; 
+			?>
+			);">Send</button>
 		</p>
 </div>

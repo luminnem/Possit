@@ -23,17 +23,7 @@
 	<script>	
 		$(function() {
 			$( ".drag-post-it" ).draggable();
-			
-			$( ".drag-post-it" ).each(function() {
-				moveRandom($(this), "friends");
-			});
-			
-			
 			$( ".polaroid" ).draggable();
-			
-			$( ".polaroid" ).each(function() {
-				moveRandom($(this), "friends");
-			});
 		});
 		
 	</script>
@@ -49,11 +39,15 @@
 					LIMIT 20";
 					
 				$q = mysql_query($query, $connection) or die (mysql_error());
+				$posts = array();
 				while ($d = mysql_fetch_assoc($q)) {
 					$postID = $d['postID'];
-					
-					echo $postsManager->getPost($postID, $usersManager, "#F4FA58", "#0CD", "Latest from who you follow");
+					array_push($posts, $postID);
 				}
+				$posts = array_unique($posts);
+				foreach($posts as &$post) {
+					echo $postsManager->getPost($post, $usersManager, "#F4FA58", "#0CD", "Latest from who you follow");
+				} unset($post);
 		}
 	?>
 </div>

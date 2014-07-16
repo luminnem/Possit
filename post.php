@@ -19,7 +19,7 @@
 		<!--Styles-->
 		<link rel="stylesheet" type="text/css" href="styles/main_page.css">
 		<link rel="stylesheet" type="text/css" href="styles/general.css">
-		<!--<link href='http://fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>
 		<link href="styles/main_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/login_banner.css" rel="Stylesheet" type="text/css">
 		<link href="styles/comments.css" rel="Stylesheet" type="text/css">
@@ -35,8 +35,8 @@
 		<script type="text/javascript" src="core/client_side/newPicArea.js"></script>
 		<script type="text/javascript" src="core/client_side/usefulTools.js"></script>
 		<script type="text/javascript" src="core/client_side/search.js"></script>
-		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		
 	</head>
 	<body>
@@ -52,9 +52,10 @@
 				}
 			?>
 		</div>
+		
 		<div id="body">
 			<?php
-				include "topComments.php";
+				include "core/server_side/getPostComments.php";
 			?>
 			
 			<div id="msger"></div>

@@ -12,3 +12,19 @@
 	font-family: 'Crafty Girls', Arial;
     font-size: 20px;
 }
+
+.rawImage {
+	display: inline-block;
+	margin: 10px;
+}
+
+.rawImageInput {
+	position: relative;
+	top: -14px;
+	width: 200px;
+	height: 20px;
+	border: 0;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	text-indent: 10px;
+}

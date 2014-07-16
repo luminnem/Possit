@@ -23,14 +23,6 @@
     max-height:100%;
     overflow:auto;
 }
-#newPicArea #title {
-    color: #555;
-    font: 22px Helvetica;
-    padding: 12px;
-    text-align: left;
-    height: 5px;
-    
-}
 
 #newPicCaption {
 	border: 0;
@@ -43,8 +35,7 @@
 		background: linear-gradient(to top #FFFFF0 0% #FEFDCA 100%);
     
 	padding:15px;
-    font-family: 'Nothing You Could Do', Arial;
-    font-size: 20px;
+    font-family: Consolas, Arial;
     color: #000; 
     width:250px; 
     margin: 12px;
@@ -67,7 +58,6 @@
 </style>
 <div id="newPicArea" class="scroll-box">
         <a style="float:right;" href="javascript:void(0)" title="Close" onClick="theBox(false, 'newPicArea', '')"><img src="/resources/close.png"></a>
-		<p id="title">New pic</p>
 		<textarea class="note-text" cols="10" rows="8" maxLength="270" id="picAreaUrl" placeHolder="Picture(s) url(s)"></textarea>
 		<p>
 		<?php

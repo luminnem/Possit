@@ -1,3 +1,12 @@
+function checkKeysToSubmit(e) {
+  var code = (e.keyCode ? e.keyCode : e.which);
+  if (code == 13) {
+    checkLogInForm();
+  }
+}
+
+
+
 function checkLogInForm() {
 
 	var username = document.getElementById("login_username").value;

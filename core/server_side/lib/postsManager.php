@@ -26,7 +26,6 @@ class PostsManager {
 		}
 		
 	}
-	
     private function getTextPost($postID, $usersManager, $clr, $usernameColor, $title, $closeButton) {
         $query = "SELECT user, body FROM posts WHERE id='$postID' LIMIT 1";
         $q = mysql_query($query, $this->connection) or die(mysql_error());
@@ -36,9 +35,9 @@ class PostsManager {
         
         while ($d = mysql_fetch_assoc($q)) {
 			
-				$string = "<div onmousedown='bringFront(this)' id='post' class='drag-post-it' title='$title' style='background: $color; background: linear-gradient(to top $color $bcolor);'>";
+				$string = "<div onmousedown='bringFront(this)' id='post' class='drag-post-it' title='$title' style='display: block; float:left; background: $color; background: linear-gradient(to top $color $bcolor);'>";
 				$string_2 = "<img id='pin' src='/resources/pin.png'>
-						<a href='#'><span class='month_comments'>%s</span></a><div class='line'></div>
+						<a href='post.php?id=%d'><span class='month_comments'>%s</span></a><div class='line'></div>
 						<a href='profile.php?id=%d' style='color: $usernameColor !important;'><span class='username_comments'>%s</span></a>";
 			
 			$buttons = "<button class='button_comments' id='$postID' onClick='upVote(this)'><img src='resources/upvote.png' title='Fluffy'></img></button>
@@ -59,7 +58,7 @@ class PostsManager {
 			
 			$blankline = str_replace(".\endl", "<br />", base64_decode($d['body']));
 			$blankline = stripslashes($blankline);
-			return sprintf($string, $blankline, $d['user'], $usersManager->getUsername($d['user']));
+			return sprintf($string, $postID, $blankline, $d['user'], $usersManager->getUsername($d['user']));
         }
     }
 	
@@ -73,8 +72,8 @@ class PostsManager {
 		$d = mysql_fetch_assoc($q);
 		$caption = base64_decode($d['caption']);
 		$string = "<div onmousedown='bringFront(this)' id='post' class='polaroid' title='$title' style='background: $color; background: linear-gradient(to top $color $bcolor);'>
-						<img src='%s' alt='%s' width='200' height='200' title='$caption'></img>
-						<span>%s</span>
+						<a href='post.php?id=%d'><img src='%s' alt='%s' width='200' height='200' title='$caption'></img>
+						<span>%s</span></a>
 						<div class='line'></div>
 						<a href='profile.php?id=%d' style='color: $usernameColor !important;'><span class='username_comments'>%s</span></a>";
 				
@@ -94,6 +93,19 @@ class PostsManager {
 		$username = $userManager->getUsername($d['userID']);
 		$caption = stripslashes(base64_decode($d['caption']));
 		
-		return sprintf($string, $url, $caption, $caption, $d['userID'], $userManager->getUsername($d['userID']));
+		return sprintf($string, $picID, $url, $caption, $caption, $d['userID'], $userManager->getUsername($d['userID']));
+	}
+	
+	
+	public function getRawUrls($postsID) {
+		while ($d = mysql_fetch_assoc($postsID)) {
+				$url = base64_decode($d['URL']);
+				$id = $d['ID'];
+				$string = "<div class='rawImage' id='$id'>
+						<p><img src='%s' width='200' height='200'></img></p>
+						<p><input type='text' placeHolder='Picture caption' name='%d' class='rawImageInput' onKeyDown='submitCaption(event, this)'></p>
+				</div>";
+				echo sprintf($string, $url, $id);
+		}
 	}
 }

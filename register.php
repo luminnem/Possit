@@ -2,6 +2,9 @@
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
   <head>
     <title>Posit - Register</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="shortcut icon" href="resources/favicon.ico">
+			
     <link rel="stylesheet" type="text/css" href="styles/login_banner.css">
     <link rel="stylesheet" type="text/css" href="styles/main_banner.css">
     <link rel="stylesheet" type="text/css" href="styles/main_page.css">
@@ -25,8 +28,14 @@
 			</tr>
         </table>
       </div>
+			
       
 	  <div class="posit_frame" id="centered">
+			<div id="rules" align="center"" style="border: 1px black dotted;">
+				<P style="color: #000 !important;">- RULES -</P>
+				<P style="color: #000 !important;">NOT porn!<BR>NOT depressing things!</P>
+				<P style="color: #000 !important;">JUST FUN!</P>
+			</div><br>
         <form action="sign_up.php" method="post">
           <ul id="register_elements">
             <li><label for="register_username" id="bevel_title_b">1. Choose your username</label></li>
