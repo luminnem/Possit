@@ -14,7 +14,7 @@ foreach ($urls as &$url) {
 }
 unset($url);
 
-if ($errors != 0) {
+if ($errors > 0) {
 	$string = "Ups not all your images were sent. [%d / %d] were sent so check out the urls and try again";
 	echo sprintf($string, ($total - $errors), $total);
 } else {
@@ -23,7 +23,7 @@ if ($errors != 0) {
 
 
 
-function sendPic($url, $errors, $connection) {
+function sendPic($url, &$errors, $connection) {
 	if (getimagesize($url)) { // Get the size of the image, if the size is equal to null or it's equal to zero then the image doesn't exist.
 		
 		//Filter possible codes
