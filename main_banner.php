@@ -34,7 +34,7 @@ function curPageName() {
 			">
 			<img src="resources/new_note.png"></img></button>
 		</td>
-		<!--<td style="width:32px" id="newPicIcon">
+		<td style="width:32px" id="newPicIcon">
 			<button id="newPicIcon" class="banner_button" onClick="showPicArea(); theBox(true, 'newPicArea', ''); theBox(false, 'month', 'showBtn');"
 			title="
 			<?php
@@ -43,7 +43,7 @@ function curPageName() {
 				else echo "New picture"; 
 			?>
 			"><img src="resources/new_pic.png"></img></button>
-		</td>-->
+		</td>
 		<td>
 			<span id="notifications"></span>
 		</td>

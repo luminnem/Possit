@@ -21,8 +21,7 @@ class PostsManager {
 				return $this->getTextPost($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
 				break;
 			case 2:
-				//return $this->getPicture($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
-				return "";
+				return $this->getPicture($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
 				break;
 		}
 		
