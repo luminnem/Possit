@@ -1,5 +1,4 @@
 <style>
-
 .postAreaButton {
 	background-color: transparent;
 	border: 0;
@@ -63,8 +62,23 @@
 		<?php
 			if (curPageName() == "profile.php") {
 				$postUserId = mysql_real_escape_string($_GET['id']);
+			} else if (curPageName() == "post.php") {
+				$postPostId = mysql_real_escape_string($_GET["id"]);
 			}
 		?>
-		    <button class="login_button_big" id="send_picture" title="Post it" onClick="checkPicData(<?php if (isset($postUserId)) echo $postUserId; else echo ""; ?>)">Send</button>
+		    <button class="login_button_big" id="send_picture" title="Post it" onClick="checkPicData(
+			<?php
+				if(isset($postUserId))
+				{
+					echo "'$postUserId"."u'";
+				}
+				
+				else if(isset($postPostId))
+				{
+					echo "'$postPostId"."p'";
+				}
+				else echo ""; 
+			?>
+			)">Send</button>
 		</p>
 </div>

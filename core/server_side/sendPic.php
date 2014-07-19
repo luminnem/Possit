@@ -4,6 +4,7 @@ session_start();
 
 
 $urls = $_POST['url'];
+$reply = mysql_real_escape_string($_POST["reply"]);
 
 $urls = explode("\n", $urls);
 $errors = 0;
@@ -18,7 +19,7 @@ if ($errors > 0) {
 	$string = "Ups not all your images were sent. [%d / %d] were sent so check out the urls and try again";
 	echo sprintf($string, ($total - $errors), $total);
 } else {
-	echo "There were no errors so, all your pictures have been sent correctly";
+	echo "There were no errors so, all your pictures have been sent correctly, go to captions lab and give them a name";
 }
 
 
@@ -46,16 +47,30 @@ function sendPic($url, &$errors, $connection) {
 		
 		//Get the id of the user who's sending the picture
 		$by = mysql_real_escape_string($_SESSION['id']);
-		//Send the encoded url of the picture to the database
-		$query_1 = "INSERT INTO posts(user, body, type) VALUES ('$by', '$pic', '2')";
-		$q = mysql_query($query_1, $connection) or die ("Ups... problem when sending your pic");
-		//If this picture was sent to an user, post it on its profile.
-		if (isset($to)) {
-			$query = "INSERT INTO users_replies(user, post) VALUES ('$to', LAST_INSERT_ID())";
-			mysql_query($query, $connection) or die ("Your picture couldn't be sent to this user");
+		
+		if($reply)
+		{
+			$query_1 = "INSERT INTO posts(user, body, type) VALUES ('$by', '$pic', '2')";
+			$q = mysql_query($query_1, $connection) or die ("Ups... problem when sending your pic");
+			//If this picture was sent to an user, post it on its profile.
+			if (isset($to)) {
+				$query = "INSERT INTO users_replies(user, post) VALUES ('$to', LAST_INSERT_ID())";
+				mysql_query($query, $connection) or die ("Your picture couldn't be sent to this user");
+			}
+		
 		}
 		
-		
+		else
+		{
+			$query_1 = "INSERT INTO posts(user, body, type) VALUES ('$by', '$pic', '2')";
+			$q = mysql_query($query_1, $connection) or die ("Ups... problem when sending your pic");
+			//If this picture was sent to an user, post it on its profile.
+			if (isset($to)) {
+				$query = "INSERT INTO posts_replies(post, reply) VALUES ('$to', LAST_INSERT_ID())";
+				mysql_query($query, $connection) or die ("Your picture couldn't be sent to this user");
+			}
+		}
+		//Send the encoded url of the picture to the database
 	} else {
 		//If the image doesn't exist ...
 		$errors += 1;
