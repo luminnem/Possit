@@ -9,7 +9,7 @@ class PostsManager {
         $this->connection = $connection;
     }
     
-	public function getPost($postID, $usersManager, $color, $usernameColor, $title, $closeButton=false) {
+	public function getPost($postID, $usersManager, $color, $usernameColor, $captionColor, $title, $closeButton=false) {
 		$query = "SELECT type FROM posts WHERE id='$postID' LIMIT 1";
 		$q = mysql_query($query, $this->connection);
 		
@@ -18,15 +18,15 @@ class PostsManager {
 		
 		switch ($type) {
 			case 1:
-				return $this->getTextPost($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
+				return $this->getTextPost($postID, $usersManager, $color, $usernameColor, $captionColor, $title, $closeButton);
 				break;
 			case 2:
-				return $this->getPicture($postID, $usersManager, $color, $usernameColor, $title, $closeButton);
+				return $this->getPicture($postID, $usersManager, $color, $usernameColor, $captionColor, $title, $closeButton);
 				break;
 		}
 		
 	}
-    private function getTextPost($postID, $usersManager, $clr, $usernameColor, $title, $closeButton) {
+    private function getTextPost($postID, $usersManager, $clr, $usernameColor, $captionColor, $title, $closeButton) {
         $query = "SELECT user, body FROM posts WHERE id='$postID' LIMIT 1";
         $q = mysql_query($query, $this->connection) or die(mysql_error());
         
@@ -37,7 +37,7 @@ class PostsManager {
 			
 				$string = "<div onmousedown='bringFront(this)' id='post' class='drag-post-it' title='$title' style='display: block; float:left; background: $color; background: linear-gradient(to top $color $bcolor);'>";
 				$string_2 = "<img id='pin' src='/resources/pin.png'>
-						<a href='post.php?id=%d'><span class='month_comments'>%s</span></a><div class='line'></div>
+						<a href='post.php?id=%d'><span class='month_comments' style='color: $captionColor;'>%s</span></a><div class='line'></div>
 						<a href='profile.php?id=%d' style='color: $usernameColor !important;'><span class='username_comments'>%s</span></a>";
 			
 			$buttons = "<button class='button_comments' id='$postID' onClick='upVote(this)'><img src='resources/upvote.png' title='Fluffy'></img></button>
@@ -62,7 +62,7 @@ class PostsManager {
         }
     }
 	
-	private function getPicture($picID, $userManager, $color, $usernameColor, $title, $closeButton) {
+	private function getPicture($picID, $userManager, $color, $usernameColor, $captionColor, $title, $closeButton) {
 		$query = "SELECT posts.user as userID, posts.body as url, posts_captions.caption as caption FROM posts LEFT JOIN posts_captions
 			ON (posts_captions.post=posts.id) WHERE posts.id='$picID' LIMIT 1";
 		
@@ -73,7 +73,7 @@ class PostsManager {
 		$caption = base64_decode($d['caption']);
 		$string = "<div onmousedown='bringFront(this)' id='post' class='polaroid' title='$title' style='display:block; float:left; background: $color; background: linear-gradient(to top $color $bcolor);'>
 						<a href='post.php?id=%d'><img src='%s' alt='%s' width='200' height='200' title='$caption'></img>
-						<span>%s</span></a>
+						<span style='color: $captionColor !important;'>%s</span></a>
 						<div class='line'></div>
 						<a href='profile.php?id=%d' style='color: $usernameColor !important;'><span class='username_comments'>%s</span></a>";
 				

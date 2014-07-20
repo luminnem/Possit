@@ -6,14 +6,14 @@
 			$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
 			while ($d = mysql_fetch_assoc($q)) {
 				$postID = $d['id'];
-				echo $postsManager->getPost($postID, $usersManager, "#FE2E64", "#FFF", "One of the best pics this month");
+				echo $postsManager->getPost($postID, $usersManager, "#B2FC3A", "#283C80", "#283C80", "One of the best pics this month");
 			}
 			
 			$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='1' ORDER BY score DESC LIMIT 10";
 			$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
 			while ($d = mysql_fetch_assoc($q)) {
 				$postID = $d['id'];
-				echo $postsManager->getPost($postID, $usersManager, "#64FE2E", "#FFF", "One of the best posts this month");
+				echo $postsManager->getPost($postID, $usersManager, "#B2FC3A", "#283C80", "#283C80", "One of the best posts this month");
 			}
 		}
 	?>
@@ -46,7 +46,7 @@
 				}
 				$posts = array_unique($posts);
 				foreach($posts as &$post) {
-					echo $postsManager->getPost($post, $usersManager, "#F4FA58", "#0CD", "Latest from who you follow");
+					echo $postsManager->getPost($post, $usersManager, "#7F5F8A", "#FFF", "#283C80", "Latest from who you follow");
 				} unset($post);
 		}
 	?>

@@ -152,7 +152,7 @@
 				$posts = array_unique($posts);
 				
 				foreach($posts as &$post) {
-					echo $postsManager->getPost($post, $usersManager, "#82f0fa", "#FFF", "Some posts from this user");
+					echo $postsManager->getPost($post, $usersManager, "#51ADEE", "#FFF", "#283C80", "Some posts from this user");
 				}
 				unset($post);
 				
@@ -162,7 +162,7 @@
 				$q = mysql_query($query, $connection) or die("Comments from this user couldn't be loaded");
 				while($d = mysql_fetch_assoc($q)) {
 					$id = $d['post'];
-					echo $postsManager->getPost($id, $usersManager, "#FFF", "#000", "Notes left to this user", true);
+					echo $postsManager->getPost($id, $usersManager, "#FFF", "#000", "#000", "Notes left to this user", true);
 				}
 				?>
     		</div>
