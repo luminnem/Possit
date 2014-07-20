@@ -2,14 +2,14 @@
 <div id="fluffy_things">
 	<?php
 		if (!isset($_SESSION['id'])) {
-			$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='2' ORDER BY score DESC LIMIT 5";
+			$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='2' ORDER BY score DESC LIMIT 10";
 			$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
 			while ($d = mysql_fetch_assoc($q)) {
 				$postID = $d['id'];
 				echo $postsManager->getPost($postID, $usersManager, "#FE2E64", "#FFF", "One of the best pics this month");
 			}
 			
-			$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='1' ORDER BY score DESC LIMIT 5";
+			$query = "SELECT id FROM posts WHERE MONTH(post_date) = MONTH(CURDATE()) AND type='1' ORDER BY score DESC LIMIT 10";
 			$q = mysql_query($query, $connection) or die("Best comments couldn't be got");
 			while ($d = mysql_fetch_assoc($q)) {
 				$postID = $d['id'];
