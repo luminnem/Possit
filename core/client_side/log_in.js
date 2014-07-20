@@ -33,7 +33,7 @@ function sendLogInData(username, password, error) {
 				location.reload(true);
 				
 			} else {
-				error.innerHTML = xmlhttp.responseText;
+				showMsg(xmlhttp.responseText);
 			}
 		}
 	}
