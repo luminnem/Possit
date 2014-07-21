@@ -48,7 +48,6 @@ $usersManager = new UsersManager($connection);
 			<?php
 			$toFind = mysql_real_escape_string($_GET['username']);
 			$toFind = strtolower($toFind);
-			$toFind = base64_encode($toFind);
 
 			$query = "SELECT ID FROM users WHERE username LIKE '%$toFind%' LIMIT 5";
 

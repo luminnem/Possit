@@ -7,7 +7,6 @@ $username = $_POST["username"];
 $username = strip_tags($username);
 $username = mysql_real_escape_string($username);
 $username = strtolower($username);
-$username = base64_encode($username);
 //PASSWORD ENCODING
 $password = $_POST["password"];
 $password = mysql_real_escape_string($password);

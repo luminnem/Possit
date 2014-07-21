@@ -12,7 +12,7 @@ class UsersManager {
 		$query_string = "SELECT username FROM users WHERE id='$userID' LIMIT 1";
 		$q = mysql_query($query_string, $this->connection) or die ("Lib error, couldn't load the username");
 		$d = mysql_fetch_assoc($q);
-		return ucfirst(base64_decode($d['username']));
+		return ucfirst($d['username']);
 	}
 	
 	public function getProfile($userID) {

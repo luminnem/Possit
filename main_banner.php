@@ -53,7 +53,7 @@ function curPageName() {
 				&nbsp;
 				<?php
 				$name = "<a href='profile.php?id=%d'>%s</a>";
-				$username = ucfirst(base64_decode($_SESSION["username"]));
+				$username = ucfirst($_SESSION["username"]);
 				$id = $_SESSION['id'];
 				echo sprintf($name, $id, $username)
 				?>
