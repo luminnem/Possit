@@ -56,15 +56,18 @@ $usersManager = new UsersManager($connection);
 			
 			$numbers = "<p>%d matches</p>";
 			echo sprintf($numbers, mysql_num_rows($q));
-			
 			while ($d = mysql_fetch_assoc($q)) {
 				$id = $d['ID'];
 				$username = $usersManager->getUsername($id);
 				
-				$string = "<p><a href='profile.php?id=%d'>%s</a></p>";
+				$string = "<p><a href='profile.php?id=%d'>".$usersManager->getProfilePicture("$id")."%s</a>&nbsp;";
+				if(!$usersManager->CheckIfFollowing($_SESSION["id"], $id))
+					$string .= "<button onClick='follow($id, this)'>Follow user</button>";
+				$string .= "</p>";
 				echo sprintf($string, $id, $username);
 			}
 			?>
 		</div>
+		<div id="msger"></div>
 	</body>
 </html>

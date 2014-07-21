@@ -37,13 +37,14 @@ class UsersManager {
 	}
 	
 	public function checkIfFollowing($user_1, $user_2) {
-	    $query = "SELECT ID FROM users_connections WHERE user_1='$user_1' AND user_2='$user_2' LIMIT 1";
-	    $q = mysql_query($query, $this->connection) or die("Friendship couldn't be checked");
-	    if (mysql_num_rows($q) == 1) {
-	        return true;
-	    } else {
-	        return false;
-	    }
+		$query = "SELECT ID FROM users_connections WHERE user_1='$user_1' AND user_2='$user_2' LIMIT 1";
+		$q = mysql_query($query, $this->connection) or die("Friendship couldn't be checked");
+		
+		if (mysql_num_rows($q) == 1 || $user_1 == $user_2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public function getNumberOfFollowers($user) {
@@ -67,7 +68,7 @@ class UsersManager {
 				$tag = "<img src='resources/default_profile_picture.jpg' id='user_profile_picture' width='50' height='50'>";
 			}
 		} else { // If the user doesn't have a profile picture, return the default one.
-			$tag = "<img src='resources/default_profile_picture.jpg'>";
+			$tag = "<img src='resources/default_profile_picture.jpg' id='user_profile_picture' width='50' height='50'>";
 		}
 		
 		return $tag;
