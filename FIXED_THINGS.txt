@@ -1,5 +1,0 @@
-- Version 0.2 change log -
-	Duplicated comments aren't shown any more.
-	Added web page icon.
-	Added rules.
-	Login with enter key.
