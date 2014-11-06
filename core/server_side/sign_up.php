@@ -23,8 +23,4 @@ $email = base64_encode($email);
 $date = date('Y-m-d');
 
 $query_string = "INSERT INTO users(username, email, password, signup_date) VALUES ('$username', '$email', '$password', '$date')";
-$q = mysql_query($query_string, $connection) or die ("Username taken!");
-
-if ($q) {
-	echo "1";
-}
+$q = mysql_query($query_string, $connection) or die ("Username taken or email!");

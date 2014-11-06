@@ -3,7 +3,7 @@
 	require_once("core/server_side/data.php");
 	include("core/server_side/lib/usersManager.php");
 	include("core/server_side/lib/postsManager.php");
-	
+
 	$usersManager = new UsersManager($connection);
 	$postsManager = new PostsManager($connection);
 ?>
@@ -11,11 +11,11 @@
 <html lang="<?php echo substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);?>">
 	<head>
 		<title>Posit</title>
-		
+
 		<!--Meta tags-->
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="shortcut icon" href="resources/favicon.ico">
-		
+
 		<!--Styles-->
 		<link rel="stylesheet" type="text/css" href="styles/main_page.css">
 		<link rel="stylesheet" type="text/css" href="styles/general.css">
@@ -25,7 +25,7 @@
 		<link href="styles/comments.css" rel="Stylesheet" type="text/css">
 		<link href="styles/pictures.css" rel="Stylesheet" type="text/css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-		
+
 		<!--Scripts-->
 		<script type="text/javascript" src="core/client_side/log_in.js"></script>
 		<script type="text/javascript" src="core/client_side/profile.js"></script>
@@ -35,14 +35,15 @@
 		<script type="text/javascript" src="core/client_side/newPicArea.js"></script>
 		<script type="text/javascript" src="core/client_side/usefulTools.js"></script>
 		<script type="text/javascript" src="core/client_side/search.js"></script>
+		<script type="text/javascript" src="core/client_side/loadPosts.js"></script>
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		
+
 	</head>
 	<body>
-	
+
 		<div id="ban">
-			<?php 
+			<?php
 				if (!isset($_SESSION["id"])) {
 					include "login_banner.php";
 
@@ -56,7 +57,7 @@
 			<?php
 				include "topComments.php";
 			?>
-			
+
 			<div id="msger"></div>
 		</div>
 	</body>

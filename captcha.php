@@ -15,8 +15,7 @@ for ($i = 0; $i < 4; $i++)
 $_SESSION['captcha'] = strtolower($randomString);
 
 $im = @imagecreatefrompng("resources/captcha_bg.png");
-
-imagettftext($im, 30, 0, 0, 38, imagecolorallocate($im, 0, 0, 0), 'resources/larabiefont.ttf', $randomString);
+imagettftext($im, 30, 0, 0, 38, imagecolorallocate($im, 0, 0, 0), 'resources/larabiefont.ttf', $_SESSION['captcha']);
 header ('Content-type: image/png');
 imagepng($im, NULL, 0);
 imagedestroy($im);
