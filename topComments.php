@@ -1,14 +1,13 @@
-<table>
+<table align="center" id="tag_buttons">
 	<tr>
-		<td><input type="button" value="Fluffy images"
-			onClick="fluffyImages()"></td>
-		<td><input type="button" value="Fluffy texts" onClick="fluffyTexts()"></td>
-		<td><input type="button" value="Funny images" onClick="fluffyImages()"></td>
-		<td><input type="button" value="Funny texts" onClick="fluffyTexts()"></td>
+		<td><input type="button" value="Fluffy images" id="fluffyImages" onClick="loadClassifiedPosts('fluffy', 2, this)"></td>
+		<td><input type="button" value="Fluffy texts" id="fluffyTexts" onClick="loadClassifiedPosts('fluffy', 1, this)"></td>
+		<td><input type="button" value="Funny images" id="funnyImages" onClick="loadClassifiedPosts('funny', 2, this)"></td>
+		<td><input type="button" value="Funny texts" id="funnyTexts" onClick="loadClassifiedPosts('funny', 1, this)"></td>
 	</tr>
 </table>
 
-<div id="fluffy_things">
+<div id="posts_container">
 
 
 	<?php

@@ -67,3 +67,21 @@
     -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
+#tag_buttons input {
+	border: 1px silver solid;
+	background: white;
+	color: lightgray;
+	border-bottom: 0;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+#tag_buttons input:hover {
+	border: 1px gray solid;
+	background: whitesmoke;
+	color: darkgray;
+	border-bottom: 0;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
